@@ -1,61 +1,49 @@
-# Time-based Blind SQL Injection Script - WELLBSQLI
+# Time-based Blind SQL Injection Script
 
 ## Descrição
 
-  Este script Python é projetado para realizar injeções SQL baseadas em tempo (time-based blind SQL injection) em URLs. Ele envia uma lista de payloads para diferentes         parâmetros de URL, paths, e cabeçalhos HTTP para verificar possíveis vulnerabilidades de injeção SQL. 
+Este script foi criado para testar vulnerabilidades de injeção SQL baseada em tempo (Time-based Blind SQL Injection) em aplicações web. Ele realiza solicitações HTTP com payloads que causam atrasos na resposta quando uma vulnerabilidade está presente.
 
 ## Funcionalidades
 
-- **Injeção em Parâmetros de URL**: Injeta payloads nos parâmetros de consulta da URL.
-- **Injeção em Paths**: Adiciona payloads ao caminho da URL.
-- **Injeção em Cabeçalhos HTTP**: Adiciona payloads aos cabeçalhos `User-Agent`, `Referer`, e `Cookie`.
-- **Suporte a Proxies**: Permite o uso de um proxy HTTP para direcionar as solicitações.
-- **Relatório de Resultados**: Salva resultados de sucesso em um arquivo de saída.
-- **Verificação de Certificado SSL Desativada**: Ignora a verificação de certificado SSL para evitar erros de conexão.
-
-## Instalação
-
-1. **Clone o repositório** (ou faça o download do script):
-   
-   ```bash
-   git clone <URL_DO_REPOSITORIO>
-   cd <DIRETORIO_DO_REPOSITORIO>
-
-2. **Instale as dependências** :
-
-  É recomendado criar um ambiente virtual para instalar as dependências.
-
-  ```bash
-  python -m venv venv
-  source venv/bin/activate  # Para Linux/Mac
-  venv\Scripts\activate     # Para Windows
-  pip install <PACOTES>
-  ```
+- Testa URLs individuais ou a partir de uma lista de URLs.
+- Injeção de payloads em diferentes partes da solicitação: cabeçalhos, parâmetros de consulta, caminho da URL e corpo de dados (para solicitações POST).
+- Suporte para proxies HTTP.
+- Testes multi-thread para melhorar a eficiência.
+- Suporte para diferentes métodos de codificação de payloads.
+- Gera relatórios de vulnerabilidades encontradas.
+- Suporte para testes POST por meio de um arquivo 'request.txt'
+- Exibe a versão atual do script.
 
 ## Uso
+### Opções
 
-  ```bash
-  python wellbsqli.py -u <URL> -p <CAMINHO_PARA_PAYLOADS> [-o <CAMINHO_PARA_SAIDA>] [-s <PROXY_HTTP>]
-  ```
-
-### Opções:
-
-  * -u, --url: URL da API que será testada.
+  * -u, --url: URL que será testada.
   * -l, --list: Arquivo contendo uma lista de URLs para testar.
-  * -p, --payload-file: Arquivo contendo a lista de payloads para testar (obrigatório).
+  * -p, --payload-file: Arquivo contendo a lista de payloads para testar.
   * -o, --output: Arquivo para salvar os resultados de sucesso.
   * -s, --server-http: Proxy HTTP para direcionar as solicitações (ex: http://127.0.0.1:8080).
-  * -h, --help: Mostrar o banner e as opções disponíveis.
+  * -t, --threads: Número de threads para realizar as requisições (padrão: 2).
+  * -r, --requests: Arquivo contendo uma requisição HTTP para testar.
+  * -v, --version: Exibe a versão atual do script.
+  * -h, --help: Mostra o banner e as opções disponíveis.
 
-## Contribuições:
-  Sinta-se à vontade para contribuir com melhorias ou correções. Envie um pull request ou abra um issue para discussões.
+## Exemplos
 
-## Autor:
-  Desenvolvido por @well0x01
+  1. Testar uma url : ```python wellbsqli.py -u http://example.com/vulnerable_endpoint -p payloads.txt -o resultados.txt```
+  2. Testar uma lista de urls: ```python wellbsqli.py -l urls.txt -p payloads.txt -o resultados.txt```
+  3. Testar uma requisição HTTP específica a partir de um arquivo: ```python wellbsqli.py -r request.txt -p payloads.txt -o resultados.txt```
 
+## Changelog
+### Versão 1.0.1
 
-
-
+  * Lançamento inicial do script.
+  * Suporte para injeção de payloads em cabeçalhos, parâmetros de consulta, caminho da URL e corpo de dados.
+  * Adição de diferentes métodos de codificação de payloads.
+  * Suporte para proxy HTTP.
+  * Testes multi-thread.
+  * Geração de relatórios de vulnerabilidades.
+  * Adição da opção para exibir a versão do script.
 
 
 
